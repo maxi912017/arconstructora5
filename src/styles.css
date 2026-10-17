@@ -1,0 +1,130 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #0a0a0b;
+  --color-panel: #121214;
+  --color-panel2: #17171a;
+  --color-line: rgba(255, 255, 255, 0.09);
+  --color-accent: #c6202d;
+  --color-accent-soft: #e2394a;
+  --color-paper: #eceae6;
+  --color-muted: #a3a099;
+
+  --font-display: "Anton", "Archivo", sans-serif;
+  --font-sans: "Archivo", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: var(--color-ink);
+    color: var(--color-paper);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection {
+    background: var(--color-accent);
+    color: #0a0a0b;
+  }
+}
+
+@utility blueprint {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+@utility hazard {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    var(--color-accent) 0 10px,
+    transparent 10px 22px
+  );
+}
+
+@utility hazard-thin {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    var(--color-accent) 0 6px,
+    transparent 6px 14px
+  );
+}
+
+@utility text-halo {
+  -webkit-text-stroke: 0.6px rgb(10 10 11 / 0.85);
+  text-shadow:
+    0 1px 2px rgb(10 10 11 / 0.95),
+    0 0 10px rgb(10 10 11 / 0.8);
+}
+
+@utility eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  text-shadow:
+    0 1px 1px rgb(10 10 11 / 1),
+    0 0 6px rgb(10 10 11 / 0.9),
+    0 0 14px rgb(10 10 11 / 0.7);
+}
+
+@utility text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(236, 234, 230, 0.55);
+}
+
+@utility text-outline-accent {
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--color-accent);
+}
+
+@keyframes marquee-x {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@utility animate-marquee {
+  animation: marquee-x 28s linear infinite;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@utility animate-rise {
+  animation: rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.map-dark {
+  filter: invert(0.92) hue-rotate(180deg) grayscale(0.35) contrast(0.9);
+}
